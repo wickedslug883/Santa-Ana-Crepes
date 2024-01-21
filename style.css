@@ -1,0 +1,606 @@
+
+.loading-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #fff; /* Or any color you prefer */
+    z-index: 1000; /* Make sure it's above all other elements */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 1;
+    transition: opacity 0.5s ease
+ 
+}
+.loading-overlay.active {
+    display: none;
+}
+.loading-overlay svg.active {
+    /* Example animation properties */
+    animation-name: yourAnimationName;
+    animation-duration: 0.6s; /* Shorter duration for faster animation */
+    animation-timing-function: ease-in-out;
+    animation-iteration-count: infinite; /* Or a specific number */
+    /* Other animation properties as needed */
+}
+
+.main-content {
+    display: none;
+}
+.main-content.active {
+    display: block;
+}
+.slide-from-left {
+    animation: slideLeft 1s forwards;
+}
+
+.slide-from-right {
+    transform: translateX(100%);
+    animation: slideRight 1s forwards;
+}
+
+.slide-from-top {
+    transform: translateY(-100%);
+    animation: slideTop 1s forwards;
+}
+
+@keyframes slideLeft {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideRight {
+    to { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slideTop {
+    to { opacity: 1; transform: translateY(0); }
+}
+/* Nav */
+.navbar {
+    background-color: #f1eee9   !important ;
+     background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==);
+} 
+.navbar-brand {
+    color: rgb(0, 0, 0) !important;
+    text-shadow: 5px 5px 2px rgba(39, 39, 39, 0.296);
+
+    font-family: sans-serif;
+    font-weight: 900;
+    text-transform: uppercase;
+}
+/* Cart */
+h3 {
+
+}
+
+.cart-wrap {
+    display: flex;
+    flex-direction: column;
+    position: fixed;
+    right: 0;
+    width: fit-content;
+    height: fit-content;
+    z-index: 999;
+}
+#cart-icon {
+    cursor: pointer;
+    position: relative;
+    place-self: end;
+    right: 0;
+    padding-right: 5px ;
+    /* Other styling as needed */
+}
+
+.item-count {
+    position: relative;
+    top: -10px;
+    right: 2px;
+    background-color: red;
+    color: white;
+    border-radius: 50%;
+    padding: 2px 5px;
+    font-size: 0.8em;
+    animation: bounce 0.3s;
+}
+
+@keyframes bounce {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-5px); }
+}
+/* Cart Slide-In Animation */
+@keyframes slideInRight {
+    0% {
+        transform: translateX(100%);
+    }
+  
+    100% {
+        transform: translateX(0);
+    }
+}
+
+@keyframes slideOutRight {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(100%);
+    }
+}
+#cart {   
+     /* border-radius: 5%;
+  background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADIAAAAyCAMAAAAp4XiDAAAAUVBMVEWFhYWDg4N3d3dtbW17e3t1dXWBgYGHh4d5eXlzc3OLi4ubm5uVlZWPj4+NjY19fX2JiYl/f39ra2uRkZGZmZlpaWmXl5dvb29xcXGTk5NnZ2c8TV1mAAAAG3RSTlNAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEBAQEAvEOwtAAAFVklEQVR4XpWWB67c2BUFb3g557T/hRo9/WUMZHlgr4Bg8Z4qQgQJlHI4A8SzFVrapvmTF9O7dmYRFZ60YiBhJRCgh1FYhiLAmdvX0CzTOpNE77ME0Zty/nWWzchDtiqrmQDeuv3powQ5ta2eN0FY0InkqDD73lT9c9lEzwUNqgFHs9VQce3TVClFCQrSTfOiYkVJQBmpbq2L6iZavPnAPcoU0dSw0SUTqz/GtrGuXfbyyBniKykOWQWGqwwMA7QiYAxi+IlPdqo+hYHnUt5ZPfnsHJyNiDtnpJyayNBkF6cWoYGAMY92U2hXHF/C1M8uP/ZtYdiuj26UdAdQQSXQErwSOMzt/XWRWAz5GuSBIkwG1H3FabJ2OsUOUhGC6tK4EMtJO0ttC6IBD3kM0ve0tJwMdSfjZo+EEISaeTr9P3wYrGjXqyC1krcKdhMpxEnt5JetoulscpyzhXN5FRpuPHvbeQaKxFAEB6EN+cYN6xD7RYGpXpNndMmZgM5Dcs3YSNFDHUo2LGfZuukSWyUYirJAdYbF3MfqEKmjM+I2EfhA94iG3L7uKrR+GdWD73ydlIB+6hgref1QTlmgmbM3/LeX5GI1Ux1RWpgxpLuZ2+I+IjzZ8wqE4nilvQdkUdfhzI5QDWy+kw5Wgg2pGpeEVeCCA7b85BO3F9DzxB3cdqvBzWcmzbyMiqhzuYqtHRVG2y4x+KOlnyqla8AoWWpuBoYRxzXrfKuILl6SfiWCbjxoZJUaCBj1CjH7GIaDbc9kqBY3W/Rgjda1iqQcOJu2WW+76pZC9QG7M00dffe9hNnseupFL53r8F7YHSwJWUKP2q+k7RdsxyOB11n0xtOvnW4irMMFNV4H0uqwS5ExsmP9AxbDTc9JwgneAT5vTiUSm1E7BSflSt3bfa1tv8Di3R8n3Af7MNWzs49hmauE2wP+ttrq+AsWpFG2awvsuOqbipWHgtuvuaAE+A1Z/7gC9hesnr+7wqCwG8c5yAg3AL1fm8T9AZtp/bbJGwl1pNrE7RuOX7PeMRUERVaPpEs+yqeoSmuOlokqw49pgomjLeh7icHNlG19yjs6XXOMedYm5xH2YxpV2tc0Ro2jJfxC50ApuxGob7lMsxfTbeUv07TyYxpeLucEH1gNd4IKH2LAg5TdVhlCafZvpskfncCfx8pOhJzd76bJWeYFnFciwcYfubRc12Ip/ppIhA1/mSZ/RxjFDrJC5xifFjJpY2Xl5zXdguFqYyTR1zSp1Y9p+tktDYYSNflcxI0iyO4TPBdlRcpeqjK/piF5bklq77VSEaA+z8qmJTFzIWiitbnzR794USKBUaT0NTEsVjZqLaFVqJoPN9ODG70IPbfBHKK+/q/AWR0tJzYHRULOa4MP+W/HfGadZUbfw177G7j/OGbIs8TahLyynl4X4RinF793Oz+BU0saXtUHrVBFT/DnA3ctNPoGbs4hRIjTok8i+algT1lTHi4SxFvONKNrgQFAq2/gFnWMXgwffgYMJpiKYkmW3tTg3ZQ9Jq+f8XN+A5eeUKHWvJWJ2sgJ1Sop+wwhqFVijqWaJhwtD8MNlSBeWNNWTa5Z5kPZw5+LbVT99wqTdx29lMUH4OIG/D86ruKEauBjvH5xy6um/Sfj7ei6UUVk4AIl3MyD4MSSTOFgSwsH/QJWaQ5as7ZcmgBZkzjjU1UrQ74ci1gWBCSGHtuV1H2mhSnO3Wp/3fEV5a+4wz//6qy8JxjZsmxxy5+4w9CDNJY09T072iKG0EnOS0arEYgXqYnXcYHwjTtUNAcMelOd4xpkoqiTYICWFq0JSiPfPDQdnt+4/wuqcXY47QILbgAAAABJRU5ErkJggg==);
+ 
+    padding: 10px;
+    display: none;
+    max-width: 200px;
+    background-color: rgb(180, 252, 255);
+    box-shadow:0px 12px 15px #ffffff38;
+    position: relative;
+    top: -25px;
+    z-index: -1;
+   
+    border: 1px solid #000000; 
+     border-top: 0px;   */
+     position: fixed;
+     top: 0;
+     right: 0;
+     width: 100%;
+     height: 100%;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+     background-color: rgb(129, 186, 215);
+     z-index: -1;
+     overflow-y: auto;
+     transform: translateX(100%);
+     animation: slideOutRight 0.5s forwards;
+}
+#cart.open {
+    animation: slideInRight 0.5s forwards;
+}
+#cart-items li {
+    margin-bottom: 5px;
+}
+.qty-selector {
+    margin: 0 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.qty-selector i {
+    cursor: pointer;
+}
+
+.fa-trash {
+    margin-left: 10px;
+    color: red;
+    cursor: pointer;
+}
+
+/* Gen */
+* {
+    font-family: Oswald;
+}
+body{
+    background-color: rgb(4, 4, 4) !important;  
+  
+    color: rgb(255, 255, 255) !important;
+    overflow-x: hidden;
+}
+/* Menu + Functionality */
+.our-menu {
+    font-weight: 900;
+    font-family:sans-serif;
+    text-transform: uppercase;
+    color: rgb(255, 255, 255);
+    text-shadow: 5px 5px 2px rgba(223, 223, 223, 0.353);
+    margin: 0px !important;
+    padding: 15px ; 
+    
+}
+.menu-item {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
+.card {
+    background-color: #8b959e00 !important;
+    border: 1px;
+}
+.card-ingredients {
+    background-color: #8b959e00;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.5s ease-out;
+}
+
+.card-ingredients.open {
+    max-height: 500px; /* Adjust as needed for your content */
+}
+.card-title {
+    font-family: Abel;
+    letter-spacing: .2em;
+}
+.card-text {
+    font-family: Abel;
+
+}
+.ingredients {
+    font-family: Abel;
+
+}
+ul {
+    margin-top: 1rem !important;
+
+}
+.rotate-caret {
+    transition: transform 0.3s ease !important;
+}
+
+.rotate-caret.open {
+    transform: rotate(180deg) !important;
+}
+.about-us {
+    /* Your styling here */
+}
+.price-tag {
+    position: absolute;
+    right: 0;
+    word-spacing: 3px;
+}
+.about-title {
+    font-family: sans-serif;
+    font-weight: 900;
+    font-size: xx-large;
+    font-size: 4rem;
+    opacity: 0;
+    transform: translateX(-50px);
+    transition: all 0.5s ease-in-out;
+}
+.about-title-overlay {
+    position: absolute;
+    top: 50px; /* Adjust as necessary for your layout */
+    left: 50%; /* Adjust if you want to change the horizontal position */
+    transform: translateX(-80%); /* Center the div */
+    background: rgba(0, 0, 0, 0.7); /* Semi-transparent black background */
+    color: white;
+    padding: 20px;
+    max-width: 400px; /* Set a max-width if needed */
+    z-index: 10; /* Ensure it's above the image */
+}
+
+img.img-fluid {
+    display: block;
+    max-width: 100%;
+    height: auto;
+}
+
+.slide-in-animation {
+    opacity: 1;
+    transform: translateX(0);
+}
+.directions-btn {
+    font-family: sans-serif;
+
+    background-color: red !important;
+    color: white !important;
+    font-size: 1.75rem !important;
+    font-weight: 900 !important;
+    border-radius: 3% !important;
+    place-self: center !important;
+}
+.call-us-btn {
+    font-family: sans-serif;
+    margin-bottom: 25px !important;
+
+    background-color: #1900ff  !important;
+    color: white !important;
+    font-size: 1.75rem !important;
+    font-weight: 900 !important;
+    border-radius: 3% !important;
+    place-self: center !important;
+}
+
+@keyframes slideIn {
+    to {
+        opacity: 1;
+        transform: translateX(0);
+    }
+}
+/* Add a global animation style for sliding down */
+@keyframes slideDown {
+    from {
+      transform: translateY(-100%);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  /* Apply the animation to your navbar and .our-menu */
+  .navbar, .our-menu {
+    animation: slideDown 0.5s ease forwards;
+  }
+  
+  /* Initially, you might want to set your elements to be transformed up and invisible */
+  .navbar, .our-menu {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  
+  /* Optional: add a slight delay to .our-menu to animate after the navbar */
+  .our-menu {
+    animation-delay: 0.3s; /* Adjust delay as needed */
+  }
+  
+.map {
+    /* Style for your Google Map container */
+    height: 200px; /* Adjust as needed */
+}
+.buttonWrap {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 25px !important;
+}
+.directions-btn, .call-us-btn {
+    /* Style your buttons */
+}
+
+.contact-info {
+    /* Styling for address and phone info */
+}
+.address ,.address2,.address3{
+font-weight: 900 !important;
+}
+ svg .svg-elem-1 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0s;
+  }
+  
+  svg.active .svg-elem-1 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-2 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.05s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.05s;
+  }
+  
+  svg.active .svg-elem-2 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-3 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.1s;
+  }
+  
+  svg.active .svg-elem-3 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-4 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15000000000000002s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.15000000000000002s;
+  }
+  
+  svg.active .svg-elem-4 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-5 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.2s;
+  }
+  
+  svg.active .svg-elem-5 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-6 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.25s;
+  }
+  
+  svg.active .svg-elem-6 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-7 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.30000000000000004s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.30000000000000004s;
+  }
+  
+  svg.active .svg-elem-7 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-8 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.35000000000000003s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.35000000000000003s;
+  }
+  
+  svg.active .svg-elem-8 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-9 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.4s;
+  }
+  
+  svg.active .svg-elem-9 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-10 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.45s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.45s;
+  }
+  
+  svg.active .svg-elem-10 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-11 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.5s;
+  }
+  
+  svg.active .svg-elem-11 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-12 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.55s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.55s;
+  }
+  
+  svg.active .svg-elem-12 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-13 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6000000000000001s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.6000000000000001s;
+  }
+  
+  svg.active .svg-elem-13 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-14 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.65s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.65s;
+  }
+  
+  svg.active .svg-elem-14 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-15 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.7000000000000001s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.7000000000000001s;
+  }
+  
+  svg.active .svg-elem-15 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-16 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.75s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.75s;
+  }
+  
+  svg.active .svg-elem-16 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-17 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8s;
+  }
+  
+  svg.active .svg-elem-17 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-18 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8500000000000001s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.8500000000000001s;
+  }
+  
+  svg.active .svg-elem-18 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-19 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.9s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.9s;
+  }
+  
+  svg.active .svg-elem-19 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-20 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.9500000000000001s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 0.9500000000000001s;
+  }
+  
+  svg.active .svg-elem-20 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-21 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1s;
+  }
+  
+  svg.active .svg-elem-21 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-22 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.05s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.05s;
+  }
+  
+  svg.active .svg-elem-22 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-23 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.1s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.1s;
+  }
+  
+  svg.active .svg-elem-23 {
+    fill: rgb(0, 0, 0);
+  }
+  
+  svg .svg-elem-24 {
+    fill: transparent;
+    -webkit-transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.1500000000000001s;
+            transition: fill 0.2s cubic-bezier(0.68, -0.55, 0.265, 1.55) 1.1500000000000001s;
+  }
+  
+  svg.active .svg-elem-24 {
+    fill: rgb(0, 0, 0);
+  }
+  
